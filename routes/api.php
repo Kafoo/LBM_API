@@ -33,6 +33,8 @@ Route::post('/logit', function (Request $request) {
     $newLog .= "User Agent : " . $request->userAgent() . "\n";
     $newLog .= "Inputs : " . json_encode($request->all());
     file_put_contents($file, $newLog, FILE_APPEND | LOCK_EX);
+    $email = new EmailController;
+    $email->sendLogEmail($newLog);
 });
 
 Route::get('/testlogit', function () {
@@ -41,7 +43,7 @@ Route::get('/testlogit', function () {
     $newLog .= date("Y-m-d h:i:sa");
     $newLog .= " ---\n";
     $newLog .= "Log testing";
-    $email = new EmailController;
-    $email->sendLogEmail();
     file_put_contents($file, $newLog, FILE_APPEND | LOCK_EX);
+    $email = new EmailController;
+    $email->sendLogEmail($newLog);
 });

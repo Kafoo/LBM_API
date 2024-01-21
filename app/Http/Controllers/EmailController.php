@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
 {
-    public function sendLogEmail()
+    public function sendLogEmail($newLog)
     {
-        $subject = 'Un objet';
-        $body = 'Et un body !';
+        $subject = 'LBM - Nouveau contact';
+        $body = $newLog;
 
         Mail::to('ant.guillard@gmail.com')->send(new GlobalMail($subject, $body));
 
