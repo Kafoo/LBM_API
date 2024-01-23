@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/hello', function () {
-  return "Hello Worldi!";
+  return "Hello World!";
 });
 
 Route::post('/logit', function (Request $request) {
