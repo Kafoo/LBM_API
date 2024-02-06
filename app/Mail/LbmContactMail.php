@@ -9,14 +9,14 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class GlobalMail extends Mailable
+class LbmContactMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public $subject, private string  $body)
+    public function __construct(public $subject, private array  $infos)
     {
         //
     }
@@ -37,9 +37,9 @@ class GlobalMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail',
+            view: 'LbmContact',
             with: [
-                'body' => $this->body,
+                'infos' => $this->infos,
             ],
         );
     }

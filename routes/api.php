@@ -15,6 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+function setInfos($request)
+{    
+    $infos = [];
+    $infos['name'] = isset($request->name) ? $request->name : '<i>[ non-précisé ]</i>';
+    $infos['email'] = isset($request->email) ? $request->email : '<i>[ non-précisé ]</i>';
+    $infos['phone'] = isset($request->phone) ? $request->phone : '<i>[ non-précisé ]</i>';
+    $infos['eventType'] = isset($request->eventType) ? $request->eventType : '<i>[ non-précisé ]</i>';
+    $infos['guest'] = isset($request->guest) ? $request->guest : '<i>[ non-précisé ]</i>';
+    $infos['eventDate'] = isset($request->eventDate) ? $request->eventDate : '<i>[ non-précisé ]</i>';
+    $infos['message'] = isset($request->message) ? nl2br($request->message) : '<i>[ non-précisé ]</i>';
+    $infos['date'] = date("d-m-Y");
+    $infos['time'] = date("h:i", time()+3600);
+    return $infos;
+}
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -23,7 +38,7 @@ Route::get('/hello', function () {
   return "Hello World!";
 });
 
-Route::post('/logit', function (Request $request) {
+Route::post('/sendcontact', function (Request $request) {
 
     $file = 'log.txt';
     $newLog = "\n\n--- ";
@@ -33,8 +48,15 @@ Route::post('/logit', function (Request $request) {
     $newLog .= "User Agent : " . $request->userAgent() . "\n";
     $newLog .= "Inputs : " . json_encode($request->all());
     file_put_contents($file, $newLog, FILE_APPEND | LOCK_EX);
+
+    $infos = setInfos($request);
     $email = new EmailController;
-    $email->sendLogEmail($newLog);
+
+    if ($request->status == 'error') {
+        $email->sendErrorEmail($infos);
+    } else {
+        $email->sendContactEmail($infos);
+    }
 });
 
 Route::get('/testlogit', function () {
@@ -44,6 +66,8 @@ Route::get('/testlogit', function () {
     $newLog .= " ---\n";
     $newLog .= "Log testing";
     file_put_contents($file, $newLog, FILE_APPEND | LOCK_EX);
+    
+    $infos = setInfos(null);
     $email = new EmailController;
-    $email->sendLogEmail($newLog);
+    $email->sendContactEmail($infos);
 });
