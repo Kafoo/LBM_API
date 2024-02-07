@@ -21,9 +21,9 @@ function setInfos($request)
     $infos['name'] = isset($request->name) ? $request->name : '<i>[ non-précisé ]</i>';
     $infos['email'] = isset($request->email) ? $request->email : '<i>[ non-précisé ]</i>';
     $infos['phone'] = isset($request->phone) ? $request->phone : '<i>[ non-précisé ]</i>';
-    $infos['eventType'] = isset($request->eventType) ? $request->eventType : '<i>[ non-précisé ]</i>';
-    $infos['guest'] = isset($request->guest) ? $request->guest : '<i>[ non-précisé ]</i>';
-    $infos['eventDate'] = isset($request->eventDate) ? $request->eventDate : '<i>[ non-précisé ]</i>';
+    $infos['eventtype'] = isset($request->eventtype) ? $request->eventtype : '<i>[ non-précisé ]</i>';
+    $infos['guests'] = isset($request->guests) ? $request->guests : '<i>[ non-précisé ]</i>';
+    $infos['eventdate'] = isset($request->eventdate) ? $request->eventdate : '<i>[ non-précisé ]</i>';
     $infos['message'] = isset($request->message) ? nl2br($request->message) : '<i>[ non-précisé ]</i>';
     $infos['date'] = date("d-m-Y");
     $infos['time'] = date("h:i", time()+3600);

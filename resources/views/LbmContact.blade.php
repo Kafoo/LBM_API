@@ -18,9 +18,9 @@
     <p><b>Nom - Prénom : </b>{!! $infos['name'] !!}</p>
     <p><b>Email : </b>{!! $infos['email'] !!}</p>
     <p><b>Téléphone : </b>{!! $infos['phone'] !!}</p>
-    <p><b>Type d'événement : </b>{!! $infos['eventType'] !!}</p>
-    <p><b>Nombre d'invités : </b>{!! $infos['guest'] !!}</p>
-    <p><b>Date de l'événement : </b>{!! $infos['eventDate'] !!}</p>
+    <p><b>Type d'événement : </b>{!! $infos['eventtype'] !!}</p>
+    <p><b>Nombre d'invités : </b>{!! $infos['guests'] !!}</p>
+    <p><b>Date de l'événement : </b>{!! $infos['eventdate'] !!}</p>
     <p><b>Message : </b>{!! $infos['message'] !!}</p>
 
   </div>
@@ -37,6 +37,6 @@
     <p>ant.guillard@gmail.com</p>
     <p>+33 6 42 40 29 16</p>
   </div>
-  
+
 </body>
 </html>
