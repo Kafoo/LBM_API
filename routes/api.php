@@ -59,6 +59,21 @@ Route::post('/sendcontact', function (Request $request) {
     }
 });
 
+Route::get('/test/sendcontact', function () {
+
+    $file = 'log.txt';
+    $newLog = "\n\n--- ";
+    $newLog .= date("Y-m-d h:i:sa");
+    $newLog .= " ---\n";
+    $newLog .= "Log testing";
+    file_put_contents($file, $newLog, FILE_APPEND | LOCK_EX);
+
+    $infos = setInfos(null);
+    $email = new EmailController;
+
+    $email->sendTestEmail($infos);
+});
+
 Route::get('/testlogit', function () {
     $file = 'log.txt';
     $newLog = "\n\n--- ";

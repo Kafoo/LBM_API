@@ -13,6 +13,17 @@ class EmailController extends Controller
         $infos = $contactInfos;
 
         Mail::to('ant.guillard@gmail.com')->send(new LbmContactMail($subject, $infos));
+        Mail::to('nadia@lesbonnesmanieres.paris')->send(new LbmContactMail($subject, $infos));
+
+        return "Email sent successfully!";
+    }
+
+    public function sendTestEmail($contactInfos)
+    {
+        $subject = 'Nouvelle demande de contact';
+        $infos = $contactInfos;
+
+        Mail::to('ant.guillard@gmail.com')->send(new LbmContactMail($subject, $infos));
 
         return "Email sent successfully!";
     }
